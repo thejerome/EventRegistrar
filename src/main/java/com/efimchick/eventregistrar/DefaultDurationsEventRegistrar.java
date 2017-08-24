@@ -33,7 +33,7 @@ public class DefaultDurationsEventRegistrar extends CombinedEventRegistrar{
      */
     public int countRegisteredEventsForLastMinute(){
         return countRegisteredEvents(0);
-    };
+    }
 
     /**
      * Returns amount of registered events for last hour.
@@ -42,7 +42,7 @@ public class DefaultDurationsEventRegistrar extends CombinedEventRegistrar{
      */
     public int countRegisteredEventsForLastHour(){
         return countRegisteredEvents(1);
-    };
+    }
 
     /**
      * Returns amount of registered events for last day.
@@ -51,5 +51,5 @@ public class DefaultDurationsEventRegistrar extends CombinedEventRegistrar{
      */
     public int countRegisteredEventsForLastDay(){
         return countRegisteredEvents(2);
-    };
+    }
 }

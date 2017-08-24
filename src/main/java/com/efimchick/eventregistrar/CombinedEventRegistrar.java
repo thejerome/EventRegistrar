@@ -17,8 +17,8 @@ class CombinedEventRegistrar {
      * @param event event to be registered. Currently useless - no API to get events, only their count.
      */
     void registerEvent(Event event) {
-        for (int i = 0; i < members.length; i++) {
-            members[i].registerEvent(event);
+        for (EventRegistrar member : members) {
+            member.registerEvent(event);
         }
     }
 
@@ -35,7 +35,7 @@ class CombinedEventRegistrar {
             throw new IllegalArgumentException("No member for index " + memberIndex);
 
         return members[memberIndex].countRegisteredEvents();
-    };
+    }
 
 
 

@@ -12,31 +12,31 @@ import static org.hamcrest.CoreMatchers.is;
 
 public class DefaultDurationsEventRegistrarTest {
 
-    private final DefaultDurationsEventRegistrar registar = new DefaultDurationsEventRegistrar();
+    private final DefaultDurationsEventRegistrar registrar = new DefaultDurationsEventRegistrar();
 
     @Test
     public void registerEvent() throws Exception {
 
-        final Field membersField = registar.getClass().getSuperclass().getDeclaredField("members");
+        final Field membersField = registrar.getClass().getSuperclass().getDeclaredField("members");
         membersField.setAccessible(true);
-        final EventRegistrar[] members = (EventRegistrar[]) membersField.get(registar);
+        final EventRegistrar[] members = (EventRegistrar[]) membersField.get(registrar);
 
         members[0] = new TimeBasedEventRegistrar(Duration.of(0, ChronoUnit.MILLIS));
         members[1] = new TimeBasedEventRegistrar(Duration.of(100, ChronoUnit.MILLIS));
         members[2] = new TimeBasedEventRegistrar(Duration.of(1000, ChronoUnit.MILLIS));
 
-        registar.registerEvent(new Event() {});
+        registrar.registerEvent(new Event() {});
         TimeUnit.MILLISECONDS.sleep(1);
 
-        Assert.assertThat(registar.countRegisteredEventsForLastMinute(), is(0));
-        Assert.assertThat(registar.countRegisteredEventsForLastHour(), is(1));
-        Assert.assertThat(registar.countRegisteredEventsForLastDay(), is(1));
+        Assert.assertThat(registrar.countRegisteredEventsForLastMinute(), is(0));
+        Assert.assertThat(registrar.countRegisteredEventsForLastHour(), is(1));
+        Assert.assertThat(registrar.countRegisteredEventsForLastDay(), is(1));
 
         TimeUnit.MILLISECONDS.sleep(200);
 
-        Assert.assertThat(registar.countRegisteredEventsForLastMinute(), is(0));
-        Assert.assertThat(registar.countRegisteredEventsForLastHour(), is(0));
-        Assert.assertThat(registar.countRegisteredEventsForLastDay(), is(1));
+        Assert.assertThat(registrar.countRegisteredEventsForLastMinute(), is(0));
+        Assert.assertThat(registrar.countRegisteredEventsForLastHour(), is(0));
+        Assert.assertThat(registrar.countRegisteredEventsForLastDay(), is(1));
 
     }
 
